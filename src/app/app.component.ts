@@ -10,5 +10,5 @@ import { MyService } from "./shared/data-access/my.service";
 export class AppComponent {
   myService = inject(MyService);
 
-  users = toSignal(this.myService.getUsersGood());
+  users = toSignal(this.myService.getUsersBad());
 }
