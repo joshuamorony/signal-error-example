@@ -1,28 +1,18 @@
-import { Injectable, computed, effect, inject } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import {
-  catchError,
   delay,
-  map,
   of,
   switchMap,
 } from "rxjs";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { toSignalWithError } from "../utils/toSignalWithError";
 
 @Injectable({
   providedIn: "root",
 })
 export class MyService {
   http = inject(HttpClient);
-
-  dataNotifications = toSignal(
-    this.getFromAPIError().pipe(
-      map((result) => ({value: result, error: undefined})),
-      catchError((err) => of({value: undefined, error: err}))
-    )
-  )
-  dataError = computed(() => this.dataNotifications()?.error?.message);
-  data = computed(() => this.dataNotifications()?.value);
+  data = toSignalWithError(this.getFromAPIError())
 
   getFromAPI() {
     return of(null).pipe(

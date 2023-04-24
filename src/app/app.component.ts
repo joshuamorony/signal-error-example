@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { MyService } from "./shared/data-access/my.service";
 
 @Component({
@@ -6,20 +6,20 @@ import { MyService } from "./shared/data-access/my.service";
   template: `
     <p>Let's load some data!</p>
     <ul>
-      <ng-container *ngIf="myService.data(); else loading">
-        <li *ngFor="let todo of myService.data()">
+      <ng-container *ngIf="myService.data.value(); else loading">
+        <li *ngFor="let todo of myService.data.value()">
           {{ todo.title }}
         </li>
       </ng-container>
       <ng-template #loading>
-        <li *ngIf="!myService.dataError(); else failed">
+        <li *ngIf="!myService.data.error(); else failed">
           They see me loadin'...
         </li>
       </ng-template>
       <ng-template #failed>
         <p>Uh oh... you're on your own buddy:</p>
         <small>
-          {{ myService.dataError() }}
+          {{ myService.data.error().message }}
         </small>
       </ng-template>
     </ul>
