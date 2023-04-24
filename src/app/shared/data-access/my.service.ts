@@ -1,15 +1,11 @@
 import { Injectable, computed, effect, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import {
-  EMPTY,
   catchError,
   delay,
-  filter,
   map,
-  materialize,
   of,
   switchMap,
-  tap,
 } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
