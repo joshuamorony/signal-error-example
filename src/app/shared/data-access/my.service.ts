@@ -5,7 +5,7 @@ import {
   of,
   switchMap,
 } from "rxjs";
-import { toSignalWithError } from "../utils/toSignalWithError";
+import { toSignalWithError } from "@joshmorony/signal-with-error";
 
 @Injectable({
   providedIn: "root",
